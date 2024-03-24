@@ -1,12 +1,14 @@
 import os
 import logging
 from pyrogram import Client 
+import time
 
 FORMAT = "[INFO]: %(message)s"
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
               logging.StreamHandler()], format=FORMAT)
 
+StartTime = time.time()
 
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
