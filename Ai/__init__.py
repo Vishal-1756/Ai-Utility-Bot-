@@ -32,9 +32,9 @@ def get_readable_time(seconds: int) -> str:
 
 
 
-API_ID = os.getenv("API_ID")
-API_HASH = os.getenv("API_HASH")
-TOKEN = os.getenv("TOKEN")
+API_ID = "23659727"
+API_HASH = "b8a345d0b0208c0b46c5522164de8c4f"
+TOKEN = "7067552176:AAHi8JYdtMHtz1TFu4uk0K9ZPI8GW1B9H4Y"
 GROUP_ID = -1001717881477
 
 bot = Client(
