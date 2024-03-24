@@ -4,7 +4,7 @@ import time
 import datetime
 from Ai import bot, GROUP_ID
 from Ai import get_readable_time, StartTime
-
+import pyrogram
 
 start_time = time.time()    
 end_time = time.time()
@@ -13,7 +13,8 @@ uptime = get_readable_time((time.time() - StartTime))
     
    
 restart_text = """
-Heya @{} I'm Back To Work Again
+Hue @{} I Back To Work Again
+
 Date: {}
 Time: {}
 """
@@ -33,6 +34,7 @@ async def callback_handler(bot, query):
 
 async def run_clients():
     await bot.run()
+    await pyrogram.idle()
     zone = await get_date_time()
     await bot.send_photo(
         chat_id=GROUP_ID,
@@ -41,7 +43,7 @@ async def run_clients():
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton("👨‍💻 Server 👨‍💻", callback_data="server")],
-                [InlineKeyboardButton(" + Add me +", url="http://t.me/VegetaRobot?startgroup=new")]
+                [InlineKeyboardButton(" + Add me +", url="http://t.me/GojoAiRobot?startgroup=new")]
             ]
         )
     )
