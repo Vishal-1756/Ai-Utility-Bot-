@@ -34,9 +34,10 @@ async def callback_handler(bot, query):
 async def run_clients():
     await bot.start()
     zone = await get_date_time()
-    await bot.send_message(
+    await bot.send_photo(
         chat_id=GROUP_ID,
-        text=restart_text.format((await bot.get_me()).username, zone["date"], zone["time"]),
+        photo="https://telegra.ph/file/0f3564033eb45dd7d5cce.jpg",
+        caption=restart_text.format((await bot.get_me()).username, zone["date"], zone["time"]),
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton("👨‍💻 Server 👨‍💻", callback_data="server")],
