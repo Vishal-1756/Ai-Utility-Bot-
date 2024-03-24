@@ -25,6 +25,9 @@ async def bard(_, message: Message):
     if len(message.command) < 2:
         return await message.reply_text("Please provide a query.")
 
+    elif len(message.text) < 2:
+        return await message.reply_text("Please provide a query.")
+
     query = " ".join(message.command[1:])
     txt = await message.reply_text("Wait patiently, requesting to API...")
     await txt.edit("⌨️")
