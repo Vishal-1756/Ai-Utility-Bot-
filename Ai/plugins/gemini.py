@@ -2,7 +2,6 @@ import requests
 from pyrogram import filters, Client
 from pyrogram.types import Message
 from Ai import bot
-import httpx
 
 api_url_chat5 = "https://tofu-api.onrender.com/chat/gemini"
 
@@ -12,7 +11,11 @@ def fetch_data(api_url: str, query: str) -> tuple:
         response.raise_for_status()
         data = response.json()
         if data.get("code") == 2:
-            return data.get("content", "No response from the API."), None
+            content = data.get("content", [])
+            if content:
+                return content[0].get("text"), None
+            else:
+                return "No response from the API.", None
         else:
             return None, f"API error: {data.get('message', 'Unknown error')}"
     except requests.exceptions.RequestException as e:
@@ -20,7 +23,7 @@ def fetch_data(api_url: str, query: str) -> tuple:
     except Exception as e:
         return None, f"An error occurred: {str(e)}"
 
-@bot.on_message(filters.command(["gemini"]) & filters.regex("gemini"))
+@bot.on_message(filters.command(["gemini"]) & filters.regex(r"gemini"))
 async def gemini(_: Client, message: Message):
     if len(message.command) < 2:
         return await message.reply_text("**Please provide a query.**")
@@ -30,4 +33,4 @@ async def gemini(_: Client, message: Message):
     await txt.edit("✨")
     api_response, error_message = fetch_data(api_url_chat5, query)
     await txt.edit(api_response or error_message)
-    
+
