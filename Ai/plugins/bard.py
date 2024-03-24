@@ -50,7 +50,7 @@ async def bard(_, message: Message):
             medias[-1] = InputMediaPhoto(media=photo_url, caption=bard)
             
             try:
-                await app.send_media_group(chat_id=chat_id, media=medias, reply_to_message_id=message_id)
+                await bot.send_media_group(chat_id=chat_id, media=medias, reply_to_message_id=message_id)
                 return await txt.delete()
             except Exception as e:
                 return await txt.edit(str(e))
