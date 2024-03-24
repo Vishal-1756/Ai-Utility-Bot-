@@ -3,7 +3,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import time
 import datetime
 from Ai import bot, GROUP_ID
-from Ai import get_readable_time
+from Ai import get_readable_time, StartTime
 
 
 start_time = time.time()    
