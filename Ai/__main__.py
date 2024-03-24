@@ -1,5 +1,7 @@
-from Ai import bot , barath
+from Ai import bot
 import time
+from Ai import get_readable_time
+
 
 start_time = time.time()    
 end_time = time.time()
