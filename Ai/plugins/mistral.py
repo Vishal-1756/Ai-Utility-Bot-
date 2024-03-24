@@ -20,7 +20,8 @@ def fetch_data(api_url: str, query: str) -> tuple:
     except Exception as e:
         return None, f"An error occurred: {str(e)}"
 
-@bot.on_message(filters.command(["mistral"]) & filters.regex(r"mistral"))
+@bot.on_message(filters.command(["mistral"]))
+@bot.on_message(filters.command(["mistral"], prefixes=""))
 async def mistral(_: Client, message: Message):
     if len(message.command) < 2:
         return await message.reply_text("**Please provide a query.**")
