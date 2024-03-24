@@ -28,7 +28,7 @@ async def chatgpt5(_, message: Message):
 
     query = " ".join(message.command[1:])
     txt = await message.reply_text("Wait patiently, requesting to API...")
-    await txt.edit("💭")
+    await txt.edit("⌨️")
     
     api_response, images = fetch_data(api_url_chat5, query)
 
