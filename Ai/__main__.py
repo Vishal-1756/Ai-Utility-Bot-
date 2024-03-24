@@ -32,7 +32,7 @@ async def callback_handler(bot, query):
         pass
 
 async def run_clients():
-    await bot.start()
+    await bot.run()
     zone = await get_date_time()
     await bot.send_photo(
         chat_id=GROUP_ID,
