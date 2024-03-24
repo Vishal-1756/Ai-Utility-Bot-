@@ -17,15 +17,13 @@ def fetch_data(api_url: str, query: str) -> tuple:
     except Exception as e:
         return None, f"An error occurred: {str(e)}"
 
-@bot.on_message(filters.command(["bard"]) & filters.regex(r"bard") & filters.text)
+@bot.on_message(filters.command(["bard"]))
+@bot.on_message(filters.command(["bard"], prefixes=""))
 async def bard(_, message: Message):
     chat_id = message.chat.id
     message_id = message.id
     
     if len(message.command) < 2:
-        return await message.reply_text("Please provide a query.")
-
-    elif len(message.text) < 1:
         return await message.reply_text("Please provide a query.")
 
     query = " ".join(message.command[1:])
