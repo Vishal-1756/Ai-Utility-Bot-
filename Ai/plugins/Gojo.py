@@ -2,7 +2,6 @@ import requests
 from pyrogram import filters, Client
 from pyrogram.types import Message
 from Ai import bot
-import httpx
 
 api_url_chat5 = "https://tofu-api.onrender.com/chat/gpt"
 
@@ -30,16 +29,16 @@ async def gojo_ai(_: Client, message: Message):
     if len(message.command) < 2:
         return await message.reply_text("**Please provide a query.**")
 
-    query = " ".join(message.command[1:])    
-    txt = await message.reply_text("**Wait patiently, requesting to API...**")
-    await txt.edit("💭")
+    query = " ".join(message.command[1:])
     api_response, error_message = fetch_data(api_url_chat5, query, user_id)
     old_prompt[user_id] = api_response
-    await txt.edit(api_response or error_message)
-    
-    if txt.reply_to_message and txt.reply_to_message.from_user.id == user_id:
-        # If the message was replied by the bot, generate a new response
-        new_query = txt.reply_to_message.text
+    await message.reply_text(api_response or error_message)
+
+@bot.on_message(filters.reply & filters.text & ~filters.me)
+async def reply_to_bot_message(client: Client, message: Message):
+    user_id = message.from_user.id
+    if user_id in old_prompt:
+        new_query = old_prompt[user_id] + " " + message.text
         api_response, error_message = fetch_data(api_url_chat5, new_query, user_id)
         old_prompt[user_id] = api_response
         await message.reply_text(api_response or error_message)
