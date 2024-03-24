@@ -13,7 +13,7 @@ uptime = get_readable_time((time.time() - StartTime))
     
    
 restart_text = """
-Heya {} I'm Back To Work Again
+Heya @{} I'm Back To Work Again
 Date: {}
 Time: {}
 """
