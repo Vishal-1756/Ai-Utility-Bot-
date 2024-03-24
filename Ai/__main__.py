@@ -33,7 +33,7 @@ async def callback_handler(bot, query):
         pass
 
 async def run_clients():
-    await bot.run()
+    await bot.start()
     await pyrogram.idle()
     zone = await get_date_time()
     await bot.send_photo(
