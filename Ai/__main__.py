@@ -6,12 +6,8 @@ from Ai import bot, GROUP_ID
 from Ai import get_readable_time, StartTime
 import pyrogram
 
-start_time = time.time()    
-end_time = time.time()
-ping_time = round((end_time - start_time) * 1000, 3)
-uptime = get_readable_time((time.time() - StartTime))
-    
-   
+
+
 restart_text = """
 Hue @{} I Back To Work Again
 
@@ -27,7 +23,13 @@ async def get_date_time():
 
 @bot.on_callback_query()
 async def callback_handler(bot, query):
+    start_time = time.time()    
+    
     if query.data == "server":
+        end_time = time.time()
+        ping_time = round((end_time - start_time) * 1000, 3)
+        uptime = get_readable_time((time.time() - StartTime))
+    
         await query.answer(text="✨ Service Information ✨\n⏱️ Ping Time: {}ms\n🔺 Uptime: {}".format(ping_time, uptime), show_alert=True)
     else:
         pass
