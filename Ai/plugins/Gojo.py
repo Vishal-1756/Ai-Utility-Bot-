@@ -38,17 +38,3 @@ async def gojo_ai(_: Client, message: Message):
     if user_id in old_prompt:
         del old_prompt[user_id]
 
-@bot.on_message(filters.reply & filters.text & ~filters.me)
-async def reply_to_bot_message(client: Client, message: Message):
-    user_id = message.from_user.id
-    if user_id in old_prompt:
-        if old_prompt[user_id] is not None:
-            new_query = old_prompt[user_id] + " " + message.text
-        else:
-            new_query = message.text
-        api_response, error_message = fetch_data(api_url_chat5, new_query, user_id)
-        old_prompt[user_id] = api_response
-        await message.reply_text(api_response or error_message)
-        await asyncio.sleep(300)  # Clear data after 5 minutes
-        if user_id in old_prompt:
-            del old_prompt[user_id]
